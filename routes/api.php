@@ -17,13 +17,21 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/place/details', [\App\Http\Controllers\WrapperApiController::class, 'details'])->name('details');
-Route::get('/place/findplacefromtext', [\App\Http\Controllers\WrapperApiController::class, 'findplacefromtext'])->name('findplacefromtext');
-Route::get('/place/nearbysearch', [\App\Http\Controllers\WrapperApiController::class, 'nearbysearch'])->name('nearbysearch');
+Route::get('/place/details', [\App\Http\Controllers\WrapperApiController::class, 'details'])
+    ->middleware( \App\Http\Middleware\NpmMiddleware::class)
+    ->name('details');
+Route::get('/place/findplacefromtext', [\App\Http\Controllers\WrapperApiController::class, 'findplacefromtext'])
+    ->middleware( \App\Http\Middleware\NpmMiddleware::class)
+    ->name('findplacefromtext');
+Route::get('/place/nearbysearch', [\App\Http\Controllers\WrapperApiController::class, 'nearbysearch'])
+    ->middleware( \App\Http\Middleware\NpmMiddleware::class)
+    ->name('nearbysearch');
 Route::get('/place/textsearch', [\App\Http\Controllers\WrapperApiController::class, 'textsearch'])
     ->middleware( \App\Http\Middleware\NpmMiddleware::class)
     ->name('textsearch');
-Route::get('/place/photo', [\App\Http\Controllers\WrapperApiController::class, 'photo'])->name('photo');
+Route::get('/place/photo', [\App\Http\Controllers\WrapperApiController::class, 'photo'])
+    ->middleware( \App\Http\Middleware\NpmMiddleware::class)
+    ->name('photo');
 Route::get('/user/identitas', function(){
     return[
         'code' => '0',
